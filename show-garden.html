@@ -94,8 +94,8 @@ function apply(){
   lines.forEach(({li,ld})=>{
     const tot=Object.values(ld).reduce((a,b)=>a+b,0),have=sel.reduce((a,k)=>a+(ld[k]||0),0);
     got+=have;all+=tot;
-    li.classList.toggle("off",have===0);
-    const seg=li.dataset.seg&&document.getElementById(li.dataset.seg);if(seg)seg.classList.toggle("off",have===0);
+    const on=sel.some(k=>k in ld);li.classList.toggle("off",!on);
+    const seg=li.dataset.seg&&document.getElementById(li.dataset.seg);if(seg)seg.classList.toggle("off",!on);
     let p=li.querySelector(".part");
     if(have>0&&have<tot){if(!p){p=document.createElement("span");p.className="part";li.querySelector(".vn").appendChild(p)}p.textContent=fmt(have)+" of "+fmt(tot)+" cr";}
     else if(p)p.remove();
