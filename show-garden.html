@@ -67,9 +67,9 @@ li.emp .meta{font-style:italic}
 .foot{color:var(--muted);font-size:.82rem}
 </style>
 <div class="wrap">
-<nav><a href="whole-field.html">Whole field</a><a href="field-a.html">Field A</a><a href="field-b.html">Field B</a><a href="field-c.html">Field C</a><a href="field-d.html">Field D</a><span class="on">Show Garden</span></nav>
+<nav><a href="whole-field.html">Whole field</a><a href="field-a.html">Field A</a><a href="field-b.html">Field B</a><a href="field-c.html">Field C</a><a href="field-d.html">Field D</a><a href="field-e.html">Field E</a><span class="on">Show Garden</span></nav>
 <header><h1>Show Garden</h1><p class="sub">West part of D1–D16, planted from the <b>west end</b>. <b>Planted</b>: each row is 266 ft including a 6-ft path 70 ft from the west end (Jeroen, Nov 21). Varieties are in plan v2 order; their start and stop points are approximate. East of the Show Garden are Mixes 1–13 (Field D page).</p></header><div class="lf" id="lf"><div class="row"><b class="t">At NK from</b>
-<button data-l="1" aria-pressed="true">Load 1</button><button data-l="2" aria-pressed="true">Load 2</button><button data-l="0" aria-pressed="true">Not at NK yet</button></div>
+<button data-l="1" aria-pressed="true">Load 1</button><button data-l="2" aria-pressed="true">Load 2</button><button data-l="3" aria-pressed="true">Load 3</button><button data-l="4" aria-pressed="true">Load 4</button><button data-l="0" aria-pressed="true">Not at NK yet</button></div>
 <div class="row"><label><input type="checkbox" id="lf-hide"> Hide beds with nothing selected</label></div>
 <div class="sum" id="lf-sum"></div></div>
 <table><thead><tr><th>Group</th><th class="n">Crates</th><th class="n">Bulbs/ft</th></tr></thead><tbody><tr><td>4-crate varieties</td><td class="n">64</td><td class="n">24</td></tr><tr><td>2-crate varieties</td><td class="n">60</td><td class="n">24</td></tr><tr><td>Total, planted</td><td class="n">124</td><td class="n"></td></tr></tbody></table>
@@ -79,9 +79,10 @@ li.emp .meta{font-style:italic}
 <p class="foot">Updated Nov 21, 2026 from Jeroen's Field D measurements and the 'Nov 21st mixes' tab. Bars are to scale within this page. Show Garden variety positions are approximate (plan v2 order, stretched to the measured 266 ft). Mix positions are usable feet from the start of the east part, aisle not counted (column J of the tab).</p>
 </div>
 
+<p class="foot">Loads (updated Nov 23, 2026): Load 1 and Load 2 as delivered; Load 4 = the five pallets Jeroen brought from the Mill on Nov 19; Load 3 = everything planned that was on none of the others. Field E is the former Field D east (Jeroen, Nov 23).</p>
 <script>
 (()=>{
-const KEY="nk-loads",ALL=["1","2","0"];
+const KEY="nk-loads",ALL=["1","2","3","4","0"];
 const parse=s=>(s||"").split(",").filter(x=>ALL.includes(x));
 let sel=parse(new URLSearchParams(location.search).get("loads"));
 if(!sel.length){try{sel=parse(localStorage.getItem(KEY))}catch(e){}}
@@ -101,9 +102,9 @@ function apply(){
     else if(p)p.remove();
   });
   document.querySelectorAll(".bed").forEach(b=>{const ls=b.querySelectorAll("li[data-l]");if(!ls.length)return;b.classList.toggle("off",[...ls].every(l=>l.classList.contains("off")))});
-  const names={"1":"Load 1","2":"Load 2","0":"not at NK yet"};
-  document.getElementById("lf-sum").textContent=sel.length===3?"Whole plan: "+fmt(all)+" crates on this page.":sel.length?fmt(got)+" of "+fmt(all)+" crates on this page are in "+sel.map(k=>names[k]).join(" + ")+".":"Nothing selected.";
-  const q=sel.length===3?"":"?loads="+sel.join(",");
+  const names={"1":"Load 1","2":"Load 2","3":"Load 3","4":"Load 4","0":"not at NK yet"};
+  document.getElementById("lf-sum").textContent=sel.length===ALL.length?"Whole plan: "+fmt(all)+" crates on this page.":sel.length?fmt(got)+" of "+fmt(all)+" crates on this page are in "+sel.map(k=>names[k]).join(" + ")+".":"Nothing selected.";
+  const q=sel.length===ALL.length?"":"?loads="+sel.join(",");
   document.querySelectorAll("nav a").forEach(a=>{a.href=a.getAttribute("href").split("?")[0]+q});
   try{localStorage.setItem(KEY,sel.join(","))}catch(e){}
   try{history.replaceState(null,"",location.pathname+q+location.hash)}catch(e){}

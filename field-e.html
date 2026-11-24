@@ -1,0 +1,146 @@
+<!doctype html><html><head><meta name="robots" content="noindex,nofollow"><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+.lf{position:sticky;top:env(safe-area-inset-top,0px);z-index:6;background:var(--bg);padding:8px 0;border-bottom:1px solid var(--line);display:grid;gap:6px}
+.lf .row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.lf b.t{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-right:2px}
+.lf button{font:600 .85rem var(--body);padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
+.lf button[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.lf label{font-size:.85rem;display:flex;gap:6px;align-items:center;cursor:pointer}
+.lf .sum{font:.82rem var(--mono);color:var(--muted)}
+.lf + .dirs + .jump,.lf ~ .jump{top:calc(env(safe-area-inset-top,0px) + var(--lfh,0px))}
+section{scroll-margin-top:170px}
+li.off,.track i.off{opacity:.22}
+.bed.off{opacity:.45}
+.hide-off .bed.off{display:none}
+.part{display:inline-block;font:600 .72rem var(--mono);color:var(--bg);background:var(--fg);border-radius:4px;padding:0 5px;margin-left:4px}
+button:focus-visible{outline:2px solid var(--cover,#3b6ea5);outline-offset:2px}
+</style></head><body>
+<title>NK Field E</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Work+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Phone-first: one card per bed, a to-scale bar (left = planting start), then one line per variety */
+:root{--bg:#f6f7f2;--card:#ffffff;--fg:#1f2a1c;--muted:#5d6858;--line:#d9ded0;--soil:#ebe6d6;--sg:#c2577a;--cover:#3b6ea5;--daff:#e8c547;
+--display:"Fraunces",Georgia,serif;--body:"Work Sans",system-ui,sans-serif;--mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#141912;--card:#1b2118;--fg:#e4eadc;--muted:#9aa591;--line:#2f382b;--soil:#262c21;--sg:#e07fa1;--cover:#7fb0e6;--daff:#c9a83a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#141912;--card:#1b2118;--fg:#e4eadc;--muted:#9aa591;--line:#2f382b;--soil:#262c21;--sg:#e07fa1;--cover:#7fb0e6;--daff:#c9a83a;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font:16px/1.45 var(--body)}
+.wrap{max-width:640px;margin:0 auto;padding-block:16px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:14px}
+nav{display:flex;flex-wrap:wrap;gap:6px}
+nav a,nav span{font-size:.85rem;padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--fg);text-decoration:none}
+nav .on{background:var(--fg);color:var(--bg);border-color:var(--fg);font-weight:600}
+h1{font:600 1.9rem/1.1 var(--display);margin:0}
+.sub{color:var(--muted);margin:4px 0 0;font-size:.95rem}
+table{border-collapse:collapse;width:100%;font-size:.9rem}
+td,th{padding:5px 4px;border-bottom:1px solid var(--line);text-align:left}
+th{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.n{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+tr.tot td{font-weight:600;border:0}
+.jump{display:flex;flex-wrap:wrap;gap:4px;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);padding-block:8px;z-index:5;border-bottom:1px solid var(--line)}
+.jump a{font:500 .8rem var(--mono);min-width:2.1em;text-align:center;padding:4px 2px;border-radius:4px;background:var(--soil);color:var(--fg);text-decoration:none}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+section{scroll-margin-top:96px}
+.bed{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px}
+.bed.cov{border-color:var(--cover);border-style:dashed}
+.bed.lane{background:transparent;border-style:dashed}
+.bh{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.bn{font:600 1.35rem var(--display)}
+.bl{font:.85rem var(--mono);color:var(--muted)}
+.tag{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:var(--cover);border:1px solid var(--cover);border-radius:4px;padding:0 5px}
+.note{color:var(--muted);font-size:.9rem}
+.bar{margin:8px 0 6px;position:relative}
+.track{position:relative;height:22px;background:var(--soil);border-radius:3px;overflow:hidden}
+.track i{position:absolute;top:0;bottom:0;border-right:2px solid var(--card)}
+.track i.daff{background:repeating-linear-gradient(45deg,var(--daff) 0 4px,var(--soil) 4px 8px)}
+.dirs{display:flex;justify-content:space-between;font:.72rem var(--mono);color:var(--muted)}
+ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+li{display:flex;gap:10px;align-items:flex-start}
+.chip{flex:none;width:18px;height:18px;border-radius:4px;border:1px solid rgba(0,0,0,.25);margin-top:2px}
+.chip.empty{background:var(--soil)}
+.chip.daffc{background:repeating-linear-gradient(45deg,var(--daff) 0 3px,var(--soil) 3px 6px)}
+.vn{font-weight:600}
+.bloom{font-weight:400;font-size:.8rem;color:var(--muted)}
+.meta{font:.82rem var(--mono);color:var(--muted)}
+.nt{font-size:.8rem;color:var(--muted)}
+li.emp .meta{font-style:italic}
+.cover-head{display:flex;flex-direction:column;margin:10px 0 6px;padding-left:10px;border-left:4px solid var(--cover)}
+.cover-head span{color:var(--muted);font-size:.85rem}
+.foot{color:var(--muted);font-size:.82rem}
+</style>
+
+<div class="wrap">
+<nav><a href="whole-field.html">Whole field</a><a href="field-a.html">Field A</a><a href="field-b.html">Field B</a><a href="field-c.html">Field C</a><a href="field-d.html">Field D</a><span class="on">Field E</span><a href="show-garden.html">Show Garden</a></nav>
+<header><h1>Field E</h1><p class="sub">The former Field D east (Jeroen, Nov 23). 20 beds, <b>planted Nov 22</b> with the net planter. What is written here is what Leah wrote on her planter notes, bed by bed; parts a, b, c are in planting order. Mix contents from the "Nov 21st mixes" tab. Planter setting = Schuif / band on the planter screen.</p></header>
+<div class="jump"><a href="#E1">1</a><a href="#E2">2</a><a href="#E3">3</a><a href="#E4">4</a><a href="#E5">5</a><a href="#E6">6</a><a href="#E7">7</a><a href="#E8">8</a><a href="#E9">9</a><a href="#E10">10</a><a href="#E11">11</a><a href="#E12">12</a><a href="#E13">13</a><a href="#E14">14</a><a href="#E15">15</a><a href="#E16">16</a><a href="#E17">17</a><a href="#E18">18</a><a href="#E19">19</a><a href="#E20">20</a></div>
+<section id="E1"><div class="bed"><div class="bh"><span class="bn">E1</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#ffffff 0px 4px,#ffd23f 4px 8px)"></span><div><div class="vn">mix 1</div><div class="meta">Part a · setting 160/60</div><div class="nt">Mix 1: Catherina 2, Muscadet 2</div><div class="nt">Leah: margin &#x27;path out - out&#x27;</div></div></li>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#f4846f 0px 4px,#7b3fa0 4px 8px,#ffffff 8px 12px)"></span><div><div class="vn">mix 2 (5)</div><div class="meta">Part b · setting 160/60</div><div class="nt">Mix 2: Dordogne 2, City of Vancouver 1, Caravelle Design 2</div></div></li>
+</ul></div></section>
+<section id="E2"><div class="bed"><div class="bh"><span class="bn">E2</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#7b3fa0 0px 4px,#f28c28 4px 8px)"></span><div><div class="vn">mix 3 (2)</div><div class="meta">Part a · setting 160/60 ↑ 160/80</div><div class="nt">Mix 3: Curly Sue 1, Lambada 1</div><div class="nt">Leah: &#x27;- leftover&#x27;</div></div></li>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#f4846f 0px 4px,#7b3fa0 4px 8px,#ffffff 8px 12px)"></span><div><div class="vn">mix 2(</div><div class="meta">Part b · setting 160/60</div><div class="nt">Mix 2: Dordogne 2, City of Vancouver 1, Caravelle Design 2</div><div class="nt">Leah: written &#x27;mix 2(&#x27; - number after it cut off, UNKNOWN</div></div></li>
+</ul></div></section>
+<section id="E3"><div class="bed"><div class="bh"><span class="bn">E3</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#f49ac1 0px 4px,#fde9d9 4px 8px,#f28c28 8px 12px,#f8c8dc 12px 16px,#ffd23f 16px 20px,#d7263d 20px 24px)"></span><div><div class="vn">mix 4 (2 totes) w/ leftover mix 3</div><div class="meta">setting 180/70</div><div class="nt">Mix 4: Curly Sue 1, Elegant Lady 3, Big Smile 2, Blushing Beauty 2, Blushing Lady 2, Dordogne 1, Hella Lights 2, Kingsblood 2, Magnum Beauty 4, Menton 1, Muscadet 1, Orange Menton 4, Scarlet Smile 2; Mix 3: Curly Sue 1, Lambada 1</div><div class="nt">Leah: &#x27;big bulbs&#x27;</div></div></li>
+</ul></div></section>
+<section id="E4"><div class="bed"><div class="bh"><span class="bn">E4</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#f49ac1 0px 4px,#fde9d9 4px 8px,#f28c28 8px 12px,#f8c8dc 12px 16px,#ffd23f 16px 20px,#d7263d 20px 24px)"></span><div><div class="vn">mix 4</div><div class="meta">setting 180/60</div><div class="nt">Mix 4: Curly Sue 1, Elegant Lady 3, Big Smile 2, Blushing Beauty 2, Blushing Lady 2, Dordogne 1, Hella Lights 2, Kingsblood 2, Magnum Beauty 4, Menton 1, Muscadet 1, Orange Menton 4, Scarlet Smile 2</div></div></li>
+</ul></div></section>
+<section id="E5"><div class="bed"><div class="bh"><span class="bn">E5</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#f49ac1 0px 4px,#fde9d9 4px 8px,#f28c28 8px 12px,#f8c8dc 12px 16px,#ffd23f 16px 20px,#d7263d 20px 24px)"></span><div><div class="vn">mix 4</div><div class="meta">setting 180/60</div><div class="nt">Mix 4: Curly Sue 1, Elegant Lady 3, Big Smile 2, Blushing Beauty 2, Blushing Lady 2, Dordogne 1, Hella Lights 2, Kingsblood 2, Magnum Beauty 4, Menton 1, Muscadet 1, Orange Menton 4, Scarlet Smile 2</div></div></li>
+</ul></div></section>
+<section id="E6"><div class="bed"><div class="bh"><span class="bn">E6</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#f49ac1 0px 4px,#fde9d9 4px 8px,#f28c28 8px 12px,#f8c8dc 12px 16px,#ffd23f 16px 20px,#d7263d 20px 24px)"></span><div><div class="vn">mix 4</div><div class="meta">setting 180/60</div><div class="nt">Mix 4: Curly Sue 1, Elegant Lady 3, Big Smile 2, Blushing Beauty 2, Blushing Lady 2, Dordogne 1, Hella Lights 2, Kingsblood 2, Magnum Beauty 4, Menton 1, Muscadet 1, Orange Menton 4, Scarlet Smile 2</div></div></li>
+</ul></div></section>
+<section id="E7"><div class="bed"><div class="bh"><span class="bn">E7</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#f49ac1 0px 4px,#fde9d9 4px 8px,#f28c28 8px 12px,#f8c8dc 12px 16px,#ffd23f 16px 20px,#d7263d 20px 24px)"></span><div><div class="vn">mix 4</div><div class="meta">Part a · setting 180/60</div><div class="nt">Mix 4: Curly Sue 1, Elegant Lady 3, Big Smile 2, Blushing Beauty 2, Blushing Lady 2, Dordogne 1, Hella Lights 2, Kingsblood 2, Magnum Beauty 4, Menton 1, Muscadet 1, Orange Menton 4, Scarlet Smile 2</div><div class="nt">Leah: &#x27;didn&#x27;t finish row&#x27;</div></div></li>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#d7263d 0px 4px,#7b3fa0 4px 8px,#f49ac1 8px 12px)"></span><div><div class="vn">mix 5</div><div class="meta">Part b · setting 160/65</div><div class="nt">Mix 5: Kingsblood 1, Curly Sue 1, Doll&#x27;s Minuet 1</div></div></li>
+</ul></div></section>
+<section id="E8"><div class="bed"><div class="bh"><span class="bn">E8</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#d7263d 0px 4px,#ffd23f 4px 8px,#f8c8dc 8px 12px)"></span><div><div class="vn">mix 6</div><div class="meta">Part a · setting 160/60</div><div class="nt">Mix 6: Parrot King 1, Dee Jay Parrot 1, Cabanna 1</div><div class="nt">Leah: an &#x27;E8&#x27; line above it crossed out</div></div></li>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#d7263d 0px 4px,#7b3fa0 4px 8px,#f49ac1 8px 12px)"></span><div><div class="vn">mix 5</div><div class="meta">Part b · setting 160/60</div><div class="nt">Mix 5: Kingsblood 1, Curly Sue 1, Doll&#x27;s Minuet 1</div></div></li>
+</ul></div></section>
+<section id="E9"><div class="bed"><div class="bh"><span class="bn">E9</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#c3a6e0 0px 4px,#4a1f6b 4px 8px,#9e9e9e 8px 12px,#ffffff 12px 16px,#f28c28 16px 20px,#d7263d 20px 24px)"></span><div><div class="vn">mix 8 (tote)</div><div class="meta">Part all · setting 165/60</div><div class="nt">Mix 8: Voque 3, Canyon 2, Wyndham 2, Icoon 2, Red Bono 1</div></div></li>
+</ul></div></section>
+<section id="E10"><div class="bed"><div class="bh"><span class="bn">E10</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#f9b97a 0px 4px,#fde9d9 4px 8px,#4a1f6b 8px 12px,#ffffff 12px 16px)"></span><div><div class="vn">mix 7</div><div class="meta">Part a · setting 165/60</div><div class="nt">Mix 7: Charming Beauty 2, Queen of the Night 1, Catherina 1</div><div class="nt">Leah: an &#x27;E10 mix 8&#x27; line above it crossed out</div></div></li>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#c3a6e0 0px 4px,#4a1f6b 4px 8px,#9e9e9e 8px 12px,#ffffff 12px 16px,#f28c28 16px 20px,#d7263d 20px 24px)"></span><div><div class="vn">mix 8</div><div class="meta">Part b · setting 165/60</div><div class="nt">Mix 8: Voque 3, Canyon 2, Wyndham 2, Icoon 2, Red Bono 1</div></div></li>
+</ul></div></section>
+<section id="E11"><div class="bed"><div class="bh"><span class="bn">E11</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#f9b97a 0px 4px,#fde9d9 4px 8px,#4a1f6b 8px 12px,#ffffff 12px 16px)"></span><div><div class="vn">mix 7</div><div class="meta">Part a · setting 160/60</div><div class="nt">Mix 7: Charming Beauty 2, Queen of the Night 1, Catherina 1</div></div></li>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#ffffff 0px 4px,#7b3fa0 4px 8px,#c2185b 8px 12px)"></span><div><div class="vn">mix 9</div><div class="meta">Part b · setting 170/60</div><div class="nt">Mix 9: Outlook 2, Van Eyck 2, Negrita 2</div></div></li>
+</ul></div></section>
+<section id="E12"><div class="bed"><div class="bh"><span class="bn">E12</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#f28c28 0px 4px,#f49ac1 4px 8px)"></span><div><div class="vn">mix 10</div><div class="meta">Part a · setting 170/60</div><div class="nt">Mix 10: Crystal Beauty 2, Newcastle 2</div><div class="nt">Leah: an &#x27;E12b mix 9 170/60&#x27; line above it crossed out</div></div></li>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#ffffff 0px 4px,#7b3fa0 4px 8px,#c2185b 8px 12px)"></span><div><div class="vn">mix 9</div><div class="meta">Part b · setting 170/60</div><div class="nt">Mix 9: Outlook 2, Van Eyck 2, Negrita 2</div></div></li>
+</ul></div></section>
+<section id="E13"><div class="bed"><div class="bh"><span class="bn">E13</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#f28c28 0px 4px,#f49ac1 4px 8px)"></span><div><div class="vn">mix 10 (w/ mix 11) 2 totes</div><div class="meta">setting 170/60</div><div class="nt">Mix 10: Crystal Beauty 2, Newcastle 2; Mix 11: Apeldoorn 4, Apricot Impression 1, Barre Alta 1, Kansas Proud 2, Lightning Sun 1, Red Proud 4, Van Eijk 5, World Favorite 1</div></div></li>
+</ul></div></section>
+<section id="E14"><div class="bed"><div class="bh"><span class="bn">E14</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#c2185b 0px 4px,#d7263d 4px 8px,#ffffff 8px 12px,#f9b97a 12px 16px,#f49ac1 16px 20px,#f28c28 20px 24px)"></span><div><div class="vn">mix 11</div><div class="meta">setting 170/60</div><div class="nt">Mix 11: Apeldoorn 4, Apricot Impression 1, Barre Alta 1, Kansas Proud 2, Lightning Sun 1, Red Proud 4, Van Eijk 5, World Favorite 1</div></div></li>
+</ul></div></section>
+<section id="E15"><div class="bed"><div class="bh"><span class="bn">E15</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#c2185b 0px 4px,#d7263d 4px 8px,#ffffff 8px 12px,#f9b97a 12px 16px,#f49ac1 16px 20px,#f28c28 20px 24px)"></span><div><div class="vn">mix 11</div><div class="meta">setting 170/60</div><div class="nt">Mix 11: Apeldoorn 4, Apricot Impression 1, Barre Alta 1, Kansas Proud 2, Lightning Sun 1, Red Proud 4, Van Eijk 5, World Favorite 1</div></div></li>
+</ul></div></section>
+<section id="E16"><div class="bed"><div class="bh"><span class="bn">E16</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#c2185b 0px 4px,#d7263d 4px 8px,#ffffff 8px 12px,#f9b97a 12px 16px,#f49ac1 16px 20px,#f28c28 20px 24px)"></span><div><div class="vn">mix 11</div><div class="meta">setting 170/60</div><div class="nt">Mix 11: Apeldoorn 4, Apricot Impression 1, Barre Alta 1, Kansas Proud 2, Lightning Sun 1, Red Proud 4, Van Eijk 5, World Favorite 1</div></div></li>
+</ul></div></section>
+<section id="E17"><div class="bed"><div class="bh"><span class="bn">E17</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#ffd23f 0px 4px,#7b3fa0 4px 8px)"></span><div><div class="vn">mix 12</div><div class="meta">Part a · setting 170/60</div><div class="nt">Mix 12: Secret Perfume 1, Alison Bradley 1</div></div></li>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#c2185b 0px 4px,#d7263d 4px 8px,#ffffff 8px 12px,#f9b97a 12px 16px,#f49ac1 16px 20px,#f28c28 20px 24px)"></span><div><div class="vn">mix 11</div><div class="meta">Part b · setting 170/60</div><div class="nt">Mix 11: Apeldoorn 4, Apricot Impression 1, Barre Alta 1, Kansas Proud 2, Lightning Sun 1, Red Proud 4, Van Eijk 5, World Favorite 1</div><div class="nt">Leah: &#x27;planted in path&#x27;</div></div></li>
+</ul></div></section>
+<section id="E18"><div class="bed"><div class="bh"><span class="bn">E18</span></div><ul>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#ffd23f 0px 4px,#7b3fa0 4px 8px)"></span><div><div class="vn">mix 12</div><div class="meta">Part a · setting 170/60</div><div class="nt">Mix 12: Secret Perfume 1, Alison Bradley 1</div></div></li>
+<li><span class="chip" style="background:repeating-linear-gradient(45deg,#ffffff 0px 4px,#f28c28 4px 8px,#d7263d 8px 12px,#ffd23f 12px 16px)"></span><div><div class="vn">mix 13</div><div class="meta">Part b · setting 170/60</div><div class="nt">Mix 13: Avant Garde 1, Orange Brilliant 1, Red Purissima 1</div><div class="nt">Leah: &#x27;field E finished at 2:40&#x27;</div></div></li>
+</ul></div></section>
+<section id="E19"><div class="bed"><div class="bh"><span class="bn">E19</span></div><ul>
+<li><span class="chip daffc"></span><div><div class="vn">Daff: Fire Drill (2 crates)</div><div class="meta">Part a · setting 175/65</div><div class="nt">Daffodil, not in the mix list</div></div></li>
+<li><span class="chip daffc"></span><div><div class="vn">Daff: Shriek (2 crates)</div><div class="meta">Part b · setting 175/65</div><div class="nt">Daffodil, not in the mix list</div><div class="nt">Leah: an &#x27;E20a Daff Shriek&#x27; line below it crossed out</div></div></li>
+</ul></div></section>
+<section id="E20"><div class="bed"><div class="bh"><span class="bn">E20</span></div><ul>
+<li><span class="chip daffc"></span><div><div class="vn">Recurvus</div><div class="meta">Part a · setting 175/65</div><div class="nt">Daffodil, not in the mix list</div><div class="nt">Leah: &#x27;(1 crate)&#x27;</div></div></li>
+<li><span class="chip daffc"></span><div><div class="vn">Bridal Crown</div><div class="meta">Part b · setting 175/65</div><div class="nt">Daffodil, not in the mix list</div><div class="nt">Leah: &#x27;(1 crate)&#x27;</div></div></li>
+<li><span class="chip daffc"></span><div><div class="vn">Shriek</div><div class="meta">Part c · setting 175/65</div><div class="nt">Daffodil, not in the mix list</div><div class="nt">Leah: &#x27;(1 crate)&#x27;; &#x27;finished 4:35&#x27;</div></div></li>
+</ul></div></section>
+<p class="foot">Updated Nov 23, 2026 from Leah's planter notes of Nov 22 (NK planting log rows NK-0140 to NK-0187). Bed lengths and feet per mix were not written down, so there are no to-scale bars on this page. Loads for Field E are not recorded per bed.</p></div></body></html>
